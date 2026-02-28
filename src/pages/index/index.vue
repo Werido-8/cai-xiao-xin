@@ -44,13 +44,41 @@
             </div>
           </div>
           
-          <!-- Add Button - Squircle (rounded-2xl) -->
+          <!-- Add Button - Standardized Floating Action Button (FAB) -->
           <button 
-            class="group absolute right-0 bottom-1 w-14 h-14 rounded-2xl bg-emerald-500 text-white flex items-center justify-center shadow-lg shadow-emerald-200 active:scale-90 transition-all duration-300 hover:bg-emerald-600"
-            @click="onAddClick"
+            class="group absolute right-0 bottom-1 w-14 h-14 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-lg shadow-emerald-200 active:scale-90 transition-all duration-300 hover:bg-emerald-600"
+            @click="showAddMenu = true"
           >
+             <!-- Icon: Plus (Base64) -->
              <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTIgNHYxNm04LThINCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L3N2Zz4=" class="w-7 h-7" />
           </button>
+        </div>
+
+        <!-- Add Menu Modal -->
+        <div v-if="showAddMenu" class="fixed inset-0 z-50 flex items-end justify-center" @click="showAddMenu = false">
+           <!-- Backdrop -->
+           <div class="absolute inset-0 bg-black/20 backdrop-blur-sm transition-opacity"></div>
+           
+           <!-- Menu Content -->
+           <div class="relative bg-white w-full rounded-t-3xl p-6 pb-10 transform transition-transform animate-slide-up" @click.stop>
+              <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-8"></div>
+              
+              <h3 class="text-lg font-bold text-gray-900 mb-6 text-center">Add New Item</h3>
+              
+              <div class="grid grid-cols-2 gap-4">
+                 <!-- Scan Option -->
+                 <button class="bg-gray-50 p-6 rounded-3xl flex flex-col items-center justify-center gap-3 active:scale-95 transition-transform" @click="onScanClick">
+                    <div class="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center text-2xl">📸</div>
+                    <span class="font-bold text-gray-700 text-sm">Scan Receipt</span>
+                 </button>
+                 
+                 <!-- Manual Option -->
+                 <button class="bg-gray-50 p-6 rounded-3xl flex flex-col items-center justify-center gap-3 active:scale-95 transition-transform" @click="onManualClick">
+                    <div class="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center text-2xl">✏️</div>
+                    <span class="font-bold text-gray-700 text-sm">Manual Entry</span>
+                 </button>
+              </div>
+           </div>
         </div>
 
         <!-- Stats Cards (Grid Layout) -->
