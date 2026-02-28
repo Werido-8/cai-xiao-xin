@@ -21,10 +21,11 @@
     }
   ],
   "globalStyle": {
+    "navigationStyle": "custom",
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "菜小新",
-    "navigationBarBackgroundColor": "#FFFFFF",
-    "backgroundColor": "#F8F9FA"
+    "navigationBarBackgroundColor": "#F8FAFC",
+    "backgroundColor": "#F8FAFC"
   },
   "tabBar": {
     "color": "#9CA3AF",

@@ -1,22 +1,22 @@
 <template>
   <div 
-    class="bg-white rounded-2xl p-4 shadow-soft flex items-center justify-between active:bg-gray-50 transition-colors relative overflow-hidden"
+    class="bg-white rounded-2xl p-4 shadow-[0_8px_24px_rgba(149,157,165,0.1)] flex items-center justify-between active:scale-[0.98] transition-all duration-200 relative overflow-hidden mb-3"
     @click="onClick"
   >
     <div class="flex items-center gap-4">
        <!-- Icon Placeholder -->
-       <div class="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center text-2xl border border-gray-100">
+       <div class="w-12 h-12 rounded-xl bg-gray-50 flex items-center justify-center text-2xl p-2">
          {{ getFoodEmoji(item.name) }}
        </div>
        <div>
-         <h3 class="font-bold text-gray-900 text-base">{{ item.name }}</h3>
+         <h3 class="font-bold text-gray-900 text-lg">{{ item.name }}</h3>
          <p class="text-xs text-gray-400 mt-1 font-medium">{{ item.originalWeight }}</p>
        </div>
     </div>
 
     <!-- Tag -->
     <div 
-      class="px-3 py-1.5 rounded-full text-xs font-bold tracking-wide"
+      class="px-3 py-1 rounded-full text-xs font-bold tracking-wide flex items-center justify-center min-w-[60px]"
       :class="getStatusClass(item.status)"
     >
       {{ getStatusText(item) }}
@@ -36,10 +36,10 @@ const emit = defineEmits(['click']);
 
 const getStatusClass = (status: string) => {
   switch (status) {
-    case 'FRESH': return 'bg-emerald-100 text-emerald-600';
-    case 'WARNING': return 'bg-amber-100 text-amber-600';
-    case 'EXPIRED': return 'bg-red-100 text-red-600';
-    default: return 'bg-gray-100 text-gray-600';
+    case 'FRESH': return 'bg-emerald-50 text-emerald-600';
+    case 'WARNING': return 'bg-amber-50 text-amber-600';
+    case 'EXPIRED': return 'bg-red-50 text-red-500';
+    default: return 'bg-gray-50 text-gray-600';
   }
 };
 
