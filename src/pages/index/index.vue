@@ -7,7 +7,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="relative z-10 px-6 pt-[var(--status-bar-height)]">
+    <div class="relative z-10 px-6 pt-[var(--status-bar-height)] pb-24">
       <!-- Custom NavBar Placeholder -->
       <div class="h-12 w-full"></div>
 
@@ -46,7 +46,7 @@
           
           <!-- Add Button - Standardized Floating Action Button (FAB) -->
           <button 
-            class="group absolute right-0 bottom-1 w-14 h-14 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-lg shadow-emerald-200 active:scale-90 transition-all duration-300 hover:bg-emerald-600"
+            class="group absolute right-0 bottom-1 w-14 h-14 rounded-2xl bg-emerald-500 text-white flex items-center justify-center shadow-lg shadow-emerald-200 active:scale-90 transition-all duration-300 hover:bg-emerald-600"
             @click="showAddMenu = true"
           >
              <!-- Icon: Plus (Base64) -->
@@ -54,18 +54,18 @@
           </button>
         </div>
 
-        <!-- Add Menu Modal -->
-        <div v-if="showAddMenu" class="fixed inset-0 z-50 flex items-end justify-center" @click="showAddMenu = false">
-           <!-- Backdrop -->
-           <div class="absolute inset-0 bg-black/20 backdrop-blur-sm transition-opacity"></div>
-           
-           <!-- Menu Content -->
-           <div class="relative bg-white w-full rounded-t-3xl p-6 pb-10 transform transition-transform animate-slide-up" @click.stop>
-              <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-8"></div>
+      <!-- Add Menu Modal -->
+      <div v-if="showAddMenu" class="fixed inset-0 z-[100] flex items-end justify-center" @click="showAddMenu = false">
+         <!-- Backdrop -->
+         <div class="absolute inset-0 bg-black/20 backdrop-blur-sm transition-opacity"></div>
+         
+         <!-- Menu Content -->
+         <div class="relative bg-white w-full rounded-t-3xl p-6 pb-20 transform transition-transform animate-slide-up z-[101]" @click.stop>
+            <div class="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-8"></div>
               
               <h3 class="text-lg font-bold text-gray-900 mb-6 text-center">Add New Item</h3>
               
-              <div class="grid grid-cols-2 gap-4">
+              <div class="grid grid-cols-2 gap-4 pb-10">
                  <!-- Scan Option -->
                  <button class="bg-gray-50 p-6 rounded-3xl flex flex-col items-center justify-center gap-3 active:scale-95 transition-transform" @click="onScanClick">
                     <div class="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center text-2xl">📸</div>
@@ -153,7 +153,10 @@
     </div>
 
     <!-- Custom TabBar -->
-    <CustomTabBar currentPath="pages/index/index" />
+    <CustomTabBar 
+      currentPath="pages/index/index" 
+      :isHidden="showAddMenu"
+    />
   </div>
 </template>
 
@@ -166,6 +169,7 @@ import CustomTabBar from '../../components/CustomTabBar.vue';
 
 const store = useInventoryStore();
 const activeTab = ref('ALL');
+const showAddMenu = ref(false);
 
 const tabs = [
   { key: 'ALL', label: 'All' },
@@ -181,7 +185,17 @@ const filteredList = computed(() => {
 });
 
 const onAddClick = () => {
-  uni.showToast({ title: '功能开发中', icon: 'none' });
+  showAddMenu.value = true;
+};
+
+const onScanClick = () => {
+    uni.showToast({ title: 'Scanning...', icon: 'none' });
+    showAddMenu.value = false;
+};
+
+const onManualClick = () => {
+    uni.showToast({ title: 'Manual Entry...', icon: 'none' });
+    showAddMenu.value = false;
 };
 
 const onCardClick = (item: FoodItem) => {
@@ -209,5 +223,13 @@ const onCardClick = (item: FoodItem) => {
 }
 .animation-delay-2000 {
   animation-delay: 2s;
+}
+
+@keyframes slide-up {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+.animate-slide-up {
+    animation: slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 </style>

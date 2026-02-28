@@ -1,5 +1,8 @@
 <template>
-  <div class="fixed bottom-6 left-6 right-6 h-16 bg-white/90 backdrop-blur-xl rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] border border-white/50 flex items-center justify-between px-2 z-50">
+  <div 
+    class="fixed bottom-6 left-6 right-6 h-16 bg-white/90 backdrop-blur-xl rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] border border-white/50 flex items-center justify-between px-2 z-[90] transition-transform duration-300 ease-in-out"
+    :class="isHidden ? 'translate-y-[200%]' : 'translate-y-0'"
+  >
     <div 
       v-for="(item, index) in list" 
       :key="index"
@@ -31,7 +34,8 @@
 import { defineProps } from 'vue';
 
 const props = defineProps<{
-  currentPath: string
+  currentPath: string;
+  isHidden?: boolean;
 }>();
 
 const list = [
